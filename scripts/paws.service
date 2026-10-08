@@ -1,0 +1,19 @@
+# systemd unit for PAWS. Do not copy this by hand:
+# scripts/install_service.sh fills in __DIR__ and __USER__ and installs it.
+[Unit]
+Description=PAWS pet robot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__USER__
+WorkingDirectory=__DIR__
+ExecStart=__DIR__/.venv/bin/python -m paws serve
+Restart=on-failure
+RestartSec=3
+# Give the motors time to be switched off cleanly on stop.
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
