@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paws-robot"
+version = "1.0.0"
+description = "PAWS: Pet Automated Watch and Security. Raspberry Pi pet-sitting robot."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "gpiozero>=2.0",
+    "numpy",
+]
+
+[project.optional-dependencies]
+dev = ["opencv-python-headless", "pytest", "httpx"]
+
+[project.scripts]
+paws = "paws.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["paws*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

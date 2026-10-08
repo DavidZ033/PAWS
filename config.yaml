@@ -1,0 +1,125 @@
+# PAWS configuration
+#
+# Every pin number here is a BCM (GPIO) number, not a physical header pin.
+# The pins below are sensible placeholders. Change them to match how your
+# robot is actually wired. See docs/WIRING.md.
+#
+# Units: metres, radians, seconds. Motor powers run from -1 to 1.
+# Anything you delete from this file falls back to the default in
+# paws/config.py.
+
+robot:
+  name: PAWS
+  # auto  = real hardware on a Raspberry Pi, simulation anywhere else
+  # true  = always simulate (no GPIO, fake camera)
+  # false = always use real hardware
+  simulate: auto
+  loop_hz: 50
+  data_dir: data
+
+server:
+  host: 0.0.0.0
+  port: 8000
+  # Optional password for the API. Leave empty on a trusted home network.
+  token: ""
+
+drive:
+  pwm_frequency: 1000
+  # Cap on wheel power. Lower this while testing indoors.
+  max_power: 1.0
+  # Wheels stop if no drive command arrives for this long.
+  watchdog_timeout: 0.5
+  brake: false
+  # Measured top speeds at full power. Used by the simulator and by the
+  # heading estimate. Time the robot over a known distance and update these.
+  max_speed: 0.8        # m/s
+  max_turn_rate: 3.0    # rad/s
+  motors:
+    # in1/in2 choose direction, pwm sets speed.
+    # If a wheel spins the wrong way, flip its "inverted" flag.
+    front_left:  {in1: 17, in2: 27, pwm: 22, inverted: false}
+    front_right: {in1: 23, in2: 24, pwm: 25, inverted: false}
+    back_left:   {in1: 5,  in2: 6,  pwm: 13, inverted: false}
+    back_right:  {in1: 16, in2: 20, pwm: 21, inverted: false}
+
+encoders:
+  # Counts per wheel revolution as seen by gpiozero (one per full quadrature
+  # cycle). REV Through Bore Encoder: 2048.
+  ticks_per_rev: 2048
+  wheel_diameter: 0.06
+  enc1: {a: 10, b: 9, inverted: false}
+  enc2: {a: 11, b: 4, inverted: false}
+
+odometry:
+  # perpendicular: enc1 rolls forward/back, enc2 rolls sideways
+  # parallel:      enc1 = left wheel, enc2 = right wheel, both roll forward
+  layout: perpendicular
+  # perpendicular only: "commanded" estimates heading from turn commands,
+  # "none" assumes the robot never rotates.
+  heading_source: commanded
+  # perpendicular only: how far enc1 sits LEFT of centre and how far enc2
+  # sits FORWARD of centre (negative for right / behind).
+  enc1_offset: 0.0
+  enc2_offset: 0.0
+  # parallel only: distance between the two tracking wheels.
+  track_width: 0.20
+
+launcher:
+  pwm_frequency: 1000
+  default_power: 0.8
+  default_duration: 3.0
+  # No single spin can run longer than this.
+  max_run_time: 10.0
+  motors:
+    # The two flywheels must spin in opposite directions.
+    left:  {in1: 7,  in2: 8,  pwm: 12, inverted: false}
+    right: {in1: 14, in2: 15, pwm: 18, inverted: true}
+
+feeder:
+  pin: 19
+  # positional: swing open, wait, swing closed (one cycle = one portion)
+  # continuous: spin for open_time per portion
+  mode: positional
+  min_pulse_ms: 0.5
+  max_pulse_ms: 2.5
+  closed_position: -1.0   # -1..1
+  open_position: 0.0      # -1..1
+  open_time: 1.0
+  pause_between_portions: 0.5
+  continuous_speed: 0.5
+  max_portions: 5
+  detach_when_idle: true
+
+camera:
+  enabled: true
+  # auto, picamera2 (Pi camera), opencv (USB webcam) or synthetic
+  backend: auto
+  width: 640
+  height: 480
+  fps: 15
+  jpeg_quality: 70
+  rotate: 0               # 0, 90, 180, 270
+  device: 0
+
+detection:
+  enabled: true
+  model_dir: models
+  # yolox_tiny (more accurate) or yolox_nano (about 3x faster)
+  model: yolox_tiny
+  # Any COCO class names. Add "cat" or "person" if you like.
+  labels: [dog]
+  confidence: 0.4
+  interval: 1.0           # seconds between checks
+  input_size: 416         # must be a multiple of 32; 416 is what the model was trained at
+  event_cooldown: 60      # minimum seconds between "dog spotted" events
+  lost_after: 5
+
+navigation:
+  kp_linear: 1.5
+  kp_angular: 1.5
+  max_power: 0.5
+  max_turn_power: 0.4
+  min_power: 0.12
+  position_tolerance: 0.05
+  heading_tolerance: 0.1
+  timeout: 30             # seconds allowed per waypoint

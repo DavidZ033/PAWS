@@ -1,0 +1,5 @@
+# For running and testing on a laptop (simulation mode).
+-r requirements.txt
+opencv-python-headless
+pytest
+httpx

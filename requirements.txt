@@ -1,0 +1,8 @@
+# Installed by scripts/install.sh into a virtual environment.
+# On the Pi, picamera2, lgpio and OpenCV come from apt (see install.sh).
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.0
+pyyaml>=6.0
+gpiozero>=2.0
+numpy
