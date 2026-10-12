@@ -4,8 +4,6 @@ PAWS is a robot that keeps a dog company while nobody is home. It drives around 
 
 It was built as a senior engineering project. The chassis is fully 3D printed and a Raspberry Pi runs everything.
 
-<img src="docs/images/app-control.png" alt="PAWS phone app control screen" width="260">
-
 ## What it can do
 
 | Feature | How |
