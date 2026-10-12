@@ -8,7 +8,7 @@ PAWS is a robot we designed and built for our senior-year engineering project to
 
 **YouTube demo:** Coming soon.
 
-![PAWS Slideshow](https://docs.google.com/presentation/d/11mWznpbpR7mMRUNR1EkMT4ChuLYSGuk_UUcu1gOwv4I/edit?slide=id.g36612bb1e71_0_0#slide=id.g36612bb1e71_0_0)
+![PAWS Slideshow](images/PAWSGen3.pdf)
 
 ## Our design
 
