@@ -6,7 +6,7 @@ PAWS is a robot we designed and built for our senior-year engineering project to
   <img src="images/Board_Robot_Front.png" alt="PAWS robot beside our engineering project display" width="480">
 </p>
 
-**YouTube demo:** Coming soon.
+![PAWS Youtube Demo](https://youtu.be/9fpK9eikF0E)
 
 ![PAWS Slideshow](images/PAWSGen3.pdf)
 
