@@ -23,7 +23,7 @@ The ball launcher uses two spinning wheels to propel a ball outward. The food di
 - **Moves around:** Drive PAWS from a phone or have it follow a set of points.
 - **Plays fetch:** Launch a ball using the built-in launcher.
 - **Dispenses food:** Feed on demand or set a daily schedule.
-- **Keeps watch:** View live camera footage and save a photo when a dog is detected.
+- **Keeps watch:** View live camera footage and save a photo when your dog is detected.
 
 ![PAWS launching a tennis ball](images/Shoot_Test.png)
 
